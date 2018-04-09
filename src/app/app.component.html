@@ -31,7 +31,7 @@
 
   <button mat-fab color="accent" *ngIf="selectedLocation" (click)="startStopSession()">{{ sessionId !== null ? 'Stop' : 'Start' }}</button>
 
-  <h1 class="wait-timer" *ngIf="selectedLocation && currentEstimation">Estimated Waiting Time: {{ currentEstimation.currentAverageWaitingTime }}</h1>
+  <h1 class="wait-timer" *ngIf="selectedLocation && currentEstimation">Estimated Waiting Time: {{ currentEstimation.currentAverageWaitingTime | estimation}}</h1>
 </div>
 
 <div class="search-view" *ngIf="page === 'search'">

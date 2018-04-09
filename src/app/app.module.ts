@@ -23,11 +23,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { SessionService } from './services/session/session.service';
 import { EstimationService } from './services/estimation/estimation.service';
 import { LocationService } from './services/location/location.service';
+import { EstimationPipe } from './pipes/estimation.pipe';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EstimationPipe
   ],
   imports: [
     MatToolbarModule,

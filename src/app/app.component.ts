@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
     if (this.sessionId) {
       await this.sessionService.stopSession(this.sessionId, this.selectedLocation.id, Date.now());
       this.sessionId = null;
+      this.currentEstimation = await this.estimationService.getEstimation(this.selectedLocation.id);
     } else {
       this.sessionId = await this.sessionService.startSession(this.selectedLocation.id, Date.now());
     }
