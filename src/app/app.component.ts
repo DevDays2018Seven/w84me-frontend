@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
   public async ngOnInit(): Promise<void> {
     this.locations = await this.locationService.getLocationList();
-    console.log(this.locations);
   }
 
   public async startStopSession(): Promise<void> {

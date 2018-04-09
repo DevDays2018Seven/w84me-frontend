@@ -9,10 +9,7 @@ export class LocationService {
   constructor(private http: HttpClient) { }
 
   public getLocationList(): Promise<WaitLocation[]> {
-    // const config = { headers: new HttpHeaders() };
-    // config.headers.append('Content-Type', 'application/json');
-
-    const url = this.serverBase;
+   const url = this.serverBase;
     return this.http.get<WaitLocation[]>(url)
       .toPromise();
   }
