@@ -25,6 +25,7 @@
 .wait-view mat-expansion-panel mat-list {
     max-height: 50vh;
     overflow-y: scroll;
+    cursor: pointer;
 }
 
 .item-description {
