@@ -4,65 +4,22 @@
   <mat-card class="title-card">
     <mat-card-title>Wait 4 Me!</mat-card-title>
   </mat-card>
+  
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal data
+        </mat-panel-title>
+        <mat-panel-description>
+          Type your name and age
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-list role="list">
+          <mat-list-item *ngFor="let l of locations">{{ l }}</mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 <button mat-raised-button>Test this</button>
-
-<!-- 
-
-  <button mat-icon-button>T</button>
-
-<mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Personal data
-          </mat-panel-title>
-          <mat-panel-description>
-            Type your name and age
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-    
-        <mat-form-field>
-          <input matInput placeholder="First name">
-        </mat-form-field>
-    
-        <mat-form-field>
-          <input matInput placeholder="Age">
-        </mat-form-field>
-      </mat-expansion-panel>
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                            (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Self aware panel
-          </mat-panel-title>
-          <mat-panel-description>
-            Currently I am {{panelOpenState ? 'open' : 'closed'}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
-    </mat-accordion>
-
-
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      This is the expansion title
-    </mat-panel-title>
-    <mat-panel-description>
-      This is a summary of the content
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-   
-  <p>This is the primary content of the panel.</p>
-    
-</mat-expansion-panel>
-
--->
-
-
-
-
-
-

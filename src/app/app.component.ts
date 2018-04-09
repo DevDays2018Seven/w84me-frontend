@@ -8,6 +8,7 @@ import { LocationService } from './services/location/location.service';
 })
 export class AppComponent {
   public panelOpenState: boolean = false;
+  public locations = [1, 2, 3, 4, 5];
 
   public constructor(private locationService: LocationService) {
 
@@ -18,4 +19,5 @@ export class AppComponent {
       console.log('list:', list);
     });
   }
+
 }
