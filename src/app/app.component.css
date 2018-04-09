@@ -25,7 +25,7 @@
     overflow-y: scroll;
 }
 
-.wait-view mat-expansion-panel mat-list .item-description {
+.item-description {
     color: grey;
 } 
 

@@ -11,12 +11,13 @@ import { Estimation } from './models/estimation';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public currentEstimation: Estimation | null = null;
-  public locations: WaitLocation[] = [];
-  public selectedLocation: WaitLocation | null = null;
+  private currentEstimation: Estimation | null = null;
+  private locations: WaitLocation[] = [];
+  private selectedLocation: WaitLocation | null = null;
   private sessionId: number | null = null;
   private page: 'search' | 'wait' = 'wait';
   private columns: string[] = [];
+  private estimates: { locationId: number, waittime: number, currentWaittime: number }[] = [];
 
   public constructor(private locationService: LocationService,
     private sessionService: SessionService,
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
     this.sessionService.seedRandomSessions();
 
     this.locations = await this.locationService.getLocationList();
-    this.columns = Object.keys(WaitLocation.fromJson({})).map((el) => el.replace('_', ''));
+    this.columns = ['location', 'address', 'waittime'];
   }
 
   public async startStopSession(): Promise<void> {
@@ -43,5 +44,28 @@ export class AppComponent implements OnInit {
   public async selectLocation(location: WaitLocation): Promise<void> {
     this.selectedLocation = location;
     this.currentEstimation = await this.estimationService.getEstimation(location.id);
+  }
+
+  public fmtAddress(location: WaitLocation): string[] {
+    return location.address.split(', ');
+  }
+
+  public fmtWaittime(location: WaitLocation): string[] {
+    const result: string[] = [];
+
+    const estimate = this.estimates.find((est) => est.locationId === location.id);
+
+    result.push(`Est.: ${estimate.waittime}`);
+    result.push(`Avg.: ${estimate.currentWaittime}`);
+
+    return result;
+  }
+
+  public pullEstimates(): void {
+    this.locations.forEach((location) => {
+      this.estimationService.getEstimation(location.id).then((est) => {
+        this.estimates.push({locationId: location.id, waittime: est.estimatedWaitingTime, currentWaittime: est.currentAverageWaitingTime});
+      })
+    });
   }
 }
