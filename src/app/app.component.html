@@ -21,7 +21,7 @@
       </mat-expansion-panel-header>
 
       <mat-list>
-        <mat-list-item *ngFor="let l of locations" (click)="selectedLocation = l; expanded = false">
+        <mat-list-item *ngFor="let l of locations" (click)="selectLocation(l); expanded = false">
           <h4 mat-line class="item-name">{{ l.name }}</h4>
           <p mat-line class="item-description">{{ l.description }}</p>
         </mat-list-item>
@@ -31,7 +31,7 @@
 
   <button mat-fab color="accent" *ngIf="selectedLocation" (click)="startStopSession()">{{ sessionId !== null ? 'Stop' : 'Start' }}</button>
 
-  <h1 class="wait-timer" *ngIf="selectedLocation">Estimated Waiting Time: 01h 32' 17''</h1>
+  <h1 class="wait-timer" *ngIf="selectedLocation && currentEstimation">Estimated Waiting Time: {{ currentEstimation.currentAverageWaitingTime }}</h1>
 </div>
 
 <div class="search-view" *ngIf="page === 'search'">
