@@ -8,7 +8,7 @@ export class LocationService {
   constructor(private http: HttpClient) { }
 
   public getLocationList(): Promise<Location[]> {
-    const url = this.serverBase + 'GetLocations';
+    const url = this.serverBase + '';
     return this.http.get<Location[]>(url).toPromise();
   }
 }

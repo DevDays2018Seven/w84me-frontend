@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocationService } from './services/location/location.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public panelOpenState: boolean = false;
+
+  public constructor(private locationService: LocationService) {
+
+  }
+
+  public test(): void {
+    this.locationService.getLocationList().then((list) => {
+      console.log('list:', list);
+    });
+  }
 }
