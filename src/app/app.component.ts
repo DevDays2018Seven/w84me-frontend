@@ -7,7 +7,7 @@ import { LocationService } from './services/location/location.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public panelOpenState: boolean = false;
+  public panelOpenState = false;
   public locations = [1, 2, 3, 4, 5];
 
   public constructor(private locationService: LocationService) {
@@ -15,8 +15,9 @@ export class AppComponent {
   }
 
   public test(): void {
-    this.locationService.getLocationList().then((list) => {
-      console.log('list:', list);
+    console.log('test button');
+    this.locationService.getLocationList().then((locationList) => {
+      console.log('locationList:', locationList);
     });
   }
 
