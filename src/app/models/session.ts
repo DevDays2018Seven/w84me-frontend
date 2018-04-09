@@ -1,6 +1,6 @@
 export class WaitSession {
     static fromJson(json) {
-        return new WaitSession(json.id, json.locationId, json.timestampStart, json.timestampEnd);
+        return new WaitSession(json.locationId, json.id, json.timestampStart, json.timestampEnd);
     }
     constructor(
         private _locationId: number,
