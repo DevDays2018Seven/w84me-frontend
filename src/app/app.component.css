@@ -4,13 +4,10 @@
     justify-content: center;
 }
 
-.view .title-card {
-    text-align: center;
-}
-
 .view mat-expansion-panel {
     width: 400px;
     margin: auto;
+    margin-top: 10pt;
 }
 
 .view mat-expansion-panel .panel-description {
