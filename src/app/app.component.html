@@ -1,14 +1,14 @@
 <mat-toolbar>
   <span>W84me! Know, how much pain you'll have waiting.</span>
+  <span style="flex: 1 1 auto"></span>
+  <button mat-button [matMenuTriggerFor]="menu">Go To</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="page = 'wait'">Wait</button>
+    <button mat-menu-item (click)="page = 'search'">Search</button>
+  </mat-menu>
 </mat-toolbar>
 
-<button mat-raised-button [matMenuTriggerFor]="menu" color="accent">Go To:</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item>Search</button>
-  <button mat-menu-item>Wait</button>
-</mat-menu>
-
-<div class="view">
+<div class="wait-view" *ngIf="page === 'wait'">
   <mat-accordion>
     <mat-expansion-panel [expanded]="expanded" (opened)="expanded = true">
       <mat-expansion-panel-header>
@@ -34,4 +34,51 @@
   <h1 class="wait-timer" *ngIf="selectedLocation">Estimated Waiting Time: 01h 32' 17''</h1>
 </div>
 
-<button mat-raised-button *ngIf="false">Test this</button>
+<div class="search-view" *ngIf="page === 'search'">
+  <mat-form-field>
+    <mat-select placeholder="Select location filter">
+      <mat-option value="option">All</mat-option>
+      <mat-option value="option">Dentist</mat-option>
+      <mat-option value="option">Surgeon</mat-option>
+      <mat-option value="option">Hanibal</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="table-container mat-elevation-z8">
+      <mat-table #table [dataSource]="locations">
+    
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+        <!-- ID Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+          <!-- ID Column -->
+        <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+          <!-- ID Column -->
+        <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+          <!-- ID Column -->
+        <ng-container matColumnDef="latitude">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+          <!-- ID Column -->
+        <ng-container matColumnDef="longitude">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+      </mat-table>
+    </div>
+</div>

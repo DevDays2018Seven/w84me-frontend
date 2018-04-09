@@ -8,9 +8,11 @@ import {
   MatButtonModule,
   MatIconModule,
   MatFormFieldModule,
+  MatSelectModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatTableModule,
   MatExpansionModule
 } from '@angular/material';
 
@@ -30,10 +32,12 @@ import { LocationService } from './services/location/location.service';
   imports: [
     MatToolbarModule,
     MatMenuModule,
+    MatSelectModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
+    MatTableModule,
     MatCardModule,
     MatListModule,
     MatInputModule,

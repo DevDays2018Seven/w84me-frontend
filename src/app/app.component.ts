@@ -9,15 +9,18 @@ import { SessionService } from './services/session/session.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public locations: WaitLocation[] = [];
-  public selectedLocation: WaitLocation | null = null;
+  private locations: WaitLocation[] = [];
+  private selectedLocation: WaitLocation | null = null;
   private sessionId: number | null = null;
+  private page: 'search' | 'wait' = 'wait';
+  private columns: string[] = [];
 
   public constructor(private locationService: LocationService,
     private sessionService: SessionService) { }
 
   public async ngOnInit(): Promise<void> {
     this.locations = await this.locationService.getLocationList();
+    this.columns = Object.keys(WaitLocation.fromJson({})).map((el) => el.replace('_', ''));
   }
 
   public async startStopSession(): Promise<void> {
