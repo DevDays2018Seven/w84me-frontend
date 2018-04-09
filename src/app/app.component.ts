@@ -11,10 +11,12 @@ import { Estimation } from './models/estimation';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public estimation: Estimation;
+  public currentEstimation: Estimation | null = null;
   public locations: WaitLocation[] = [];
   public selectedLocation: WaitLocation | null = null;
   private sessionId: number | null = null;
+  private page: 'search' | 'wait' = 'wait';
+  private columns: string[] = [];
 
   public constructor(private locationService: LocationService,
     private sessionService: SessionService,
@@ -22,8 +24,11 @@ export class AppComponent implements OnInit {
   ) { }
 
   public async ngOnInit(): Promise<void> {
+    // seed random data
+    this.sessionService.seedRandomSessions();
+
     this.locations = await this.locationService.getLocationList();
-    this.estimation = await this.estimationService.geEstimation(this.locations[0].id);
+    this.columns = Object.keys(WaitLocation.fromJson({})).map((el) => el.replace('_', ''));
   }
 
   public async startStopSession(): Promise<void> {
@@ -33,5 +38,10 @@ export class AppComponent implements OnInit {
     } else {
       this.sessionId = await this.sessionService.startSession(this.selectedLocation.id, Date.now());
     }
+  }
+
+  public async selectLocation(location: WaitLocation): Promise<void> {
+    this.selectedLocation = location;
+    this.currentEstimation = await this.estimationService.getEstimation(location.id);
   }
 }

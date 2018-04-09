@@ -8,7 +8,7 @@ export class EstimationService {
 
   constructor(private http: HttpClient) { }
 
-  public geEstimation(locationId: number): Promise<Estimation> {
+  public getEstimation(locationId: number): Promise<Estimation> {
     const url = this.serverBase + '/' + locationId;
     return this.http.get<Estimation>(url)
       .toPromise();

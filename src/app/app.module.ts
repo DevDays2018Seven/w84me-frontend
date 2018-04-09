@@ -8,9 +8,11 @@ import {
   MatButtonModule,
   MatIconModule,
   MatFormFieldModule,
+  MatSelectModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatTableModule,
   MatExpansionModule
 } from '@angular/material';
 
@@ -32,10 +34,12 @@ import { EstimationPipe } from './pipes/estimation.pipe';
   imports: [
     MatToolbarModule,
     MatMenuModule,
+    MatSelectModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
+    MatTableModule,
     MatCardModule,
     MatListModule,
     MatInputModule,

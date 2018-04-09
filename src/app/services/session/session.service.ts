@@ -20,4 +20,9 @@ export class SessionService {
     const url = this.serverBase;
     return this.http.post<void>(url, { sessionId, locationId, timestamp }).toPromise();
   }
+
+  public seedRandomSessions(): Promise<void> {
+    const url = this.serverBase + '/seed';
+    return this.http.post<void>(url, {}).toPromise();
+  }
 }
