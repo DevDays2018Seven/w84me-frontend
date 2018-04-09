@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 
 import {
   MatToolbarModule,
@@ -34,6 +34,7 @@ import { EstimationPipe } from './pipes/estimation.pipe';
   imports: [
     MatToolbarModule,
     MatMenuModule,
+    FormsModule,
     MatSelectModule,
     MatExpansionModule,
     MatFormFieldModule,

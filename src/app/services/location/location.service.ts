@@ -13,4 +13,10 @@ export class LocationService {
     return this.http.get<WaitLocation[]>(url)
       .toPromise();
   }
+
+  public getLocationListNearMe(latitude: number, longitude: number, distance: number): Promise<WaitLocation[]> {
+    const url = `${this.serverBase}?latitude=${latitude}&longitude=${longitude}&distance=${distance}`;
+     return this.http.get<WaitLocation[]>(url)
+       .toPromise();
+   }
 }

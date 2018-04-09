@@ -18,13 +18,15 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  // public currentEstimation: Observable<Estimation>;
-  public locations: WaitLocation[] = [];
-  public selectedLocation: WaitLocation | null = null;
+  private intervalTimer: Observable<Estimation>;
+  private allLocations: WaitLocation[] = [];
+  private nearLocations: WaitLocation[] = [];
+  private selectedLocation: WaitLocation | null = null;
   private sessionId: number | null = null;
   private page: 'search' | 'wait' = 'wait';
   private columns: string[] = [];
-  private intervalTimer: Observable<Estimation>;
+  private estimates: { locationId: number, waittime: number, currentWaittime: number }[] = [];
+  public distance: number;
 
   public constructor(
     private locationService: LocationService,
@@ -36,16 +38,28 @@ export class AppComponent implements OnInit {
     // seed random data
     this.sessionService.seedRandomSessions();
 
-    this.locations = await this.locationService.getLocationList();
-    this.columns = Object.keys(WaitLocation.fromJson({})).map((el) => el.replace('_', ''));
-
     // get our data every subsequent 0.5 seconds
     this.intervalTimer = Observable
       .interval(500)
       .skipWhile(() => this.selectedLocation === null) // only fires when component is alive
       .startWith(0)
       .switchMap(() => this.estimationService.getEstimation(this.selectedLocation.id), (x, y) => y);
-    // .subscribe(() => this.currentEstimation = this.estimationService.getEstimation(this.selectedLocation.id));
+
+    this.allLocations = await this.locationService.getLocationList();
+    this.nearLocations = this.allLocations;
+    this.columns = ['location', 'address', 'waittime'];
+  }
+
+  public async updateLocations(): Promise<void> {
+    const latitude = 52.114666;
+    const longitude = 11.627825;
+
+    if (this.distance === null) {
+      this.nearLocations = this.allLocations;
+      return;
+    }
+
+    this.nearLocations = await this.locationService.getLocationListNearMe(latitude, longitude, this.distance);
   }
 
   public async startStopSession(): Promise<void> {
@@ -59,5 +73,33 @@ export class AppComponent implements OnInit {
 
   public async selectLocation(location: WaitLocation): Promise<void> {
     this.selectedLocation = location;
+  }
+
+  public fmtAddress(location: WaitLocation): string[] {
+    return location.address.split(', ');
+  }
+
+  public fmtWaittime(location: WaitLocation): number[] {
+    const result: number[] = [];
+
+    const estimate = this.estimates.find((est) => est.locationId === location.id);
+
+    result.push(estimate.waittime);
+    result.push(estimate.currentWaittime);
+
+    return result;
+  }
+
+  public pullEstimates(): void {
+    this.allLocations.forEach((location) => {
+      this.estimationService.getEstimation(location.id).toPromise().then((est) => {
+        this.estimates.push(
+          {
+            locationId: location.id,
+            waittime: est.estimatedWaitingTime,
+            currentWaittime: est.currentAverageWaitingTime
+          });
+      });
+    });
   }
 }
