@@ -1,5 +1,4 @@
-.view .title-card {
-    text-align: center;
-    margin: auto;
-    width: 150px;
+.view {
+    display: flex;
+    justify-content: center;
 }
