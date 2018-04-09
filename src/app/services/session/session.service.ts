@@ -4,7 +4,7 @@ import { WaitSession } from '../../models/session';
 
 @Injectable()
 export class SessionService {
-  public serverBase = 'sessions';
+  public serverBase = 'http://localhost:3000/api/v1/sessions';
 
   constructor(private http: HttpClient) { }
 

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { WaitLocation } from './models/waitLocation';
 import { LocationService } from './services/location/location.service';
 import { SessionService } from './services/session/session.service';
-import { WaitSession } from './models/session';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,7 @@ import { WaitSession } from './models/session';
 export class AppComponent implements OnInit {
   public locations: WaitLocation[] = [];
   public selectedLocation: WaitLocation | null = null;
-  private session: WaitSession | null = null;
+  private sessionId: number | null = null;
 
   public constructor(private locationService: LocationService,
     private sessionService: SessionService) { }
@@ -23,20 +22,12 @@ export class AppComponent implements OnInit {
     });
   }
 
-  public startStopSession(): void {
-    if (!this.session) {
-      this.session = new WaitSession(this.selectedLocation.id, null, Date.now(), null);
+  public async startStopSession(): Promise<void> {
+    if (this.sessionId) {
+      await this.sessionService.stopSession(this.sessionId, this.selectedLocation.id, Date.now());
+      this.sessionId = null;
     } else {
-      this.session.timestampEnd = Date.now();
+      this.sessionId = await this.sessionService.startSession(this.selectedLocation.id, Date.now());
     }
-
-    this.sessionService.startStopSession(this.session).then((sessionsId) => {
-      if (this.session.timestampEnd) {
-        this.session = null;
-      } else {
-        this.session.id = sessionsId;
-      }
-      console.log('sessionsId:', sessionsId);
-    });
   }
 }
