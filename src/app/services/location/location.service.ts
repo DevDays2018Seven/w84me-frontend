@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WaitLocation } from '../../models/waitLocation';
 
 @Injectable()
@@ -9,7 +9,11 @@ export class LocationService {
   constructor(private http: HttpClient) { }
 
   public getLocationList(): Promise<WaitLocation[]> {
+    // const config = { headers: new HttpHeaders() };
+    // config.headers.append('Content-Type', 'application/json');
+
     const url = this.serverBase;
-    return this.http.get<WaitLocation[]>(url).toPromise();
+    return this.http.get<WaitLocation[]>(url)
+      .toPromise();
   }
 }

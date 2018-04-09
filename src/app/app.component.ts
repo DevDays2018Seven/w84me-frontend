@@ -16,10 +16,9 @@ export class AppComponent implements OnInit {
   public constructor(private locationService: LocationService,
     private sessionService: SessionService) { }
 
-  public ngOnInit(): void {
-    this.locationService.getLocationList().then(locations => {
-      this.locations = locations.map((l) => WaitLocation.fromJson(l));
-    });
+  public async ngOnInit(): Promise<void> {
+    this.locations = await this.locationService.getLocationList();
+    console.log(this.locations);
   }
 
   public async startStopSession(): Promise<void> {
