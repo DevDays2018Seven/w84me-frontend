@@ -10,7 +10,9 @@ export class SessionService {
   /** Starts a session and returned the new id */
   public startSession(locationId: number, timestamp: number): Promise<number> {
     const url = this.serverBase;
-    return this.http.post<number>(url, { locationId, timestamp }).toPromise();
+    return this.http.post<{ sessionId: number }>(url, { locationId, timestamp })
+      .toPromise()
+      .then(response => response.sessionId);
   }
 
   /** Stopps a session */

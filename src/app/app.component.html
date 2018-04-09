@@ -25,7 +25,7 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <button mat-fab color="accent" *ngIf="selectedLocation" (click)="startStopSession()">{{ session ? 'Stop' : 'Start' }}</button>
+  <button mat-fab color="accent" *ngIf="selectedLocation" (click)="startStopSession()">{{ sessionId !== null ? 'Stop' : 'Start' }}</button>
 
   <h1 class="wait-timer" *ngIf="selectedLocation">Estimated Waiting Time: 01h 32' 17''</h1>
 </div>
