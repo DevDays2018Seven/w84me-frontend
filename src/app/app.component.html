@@ -11,13 +11,16 @@
         <mat-panel-title>
           My Location:
         </mat-panel-title>
-        <mat-panel-description>
+        <mat-panel-description class="panel-description">
           {{ selectedLocation?.name || 'Select your location!' }}
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <mat-list role="list">
-          <mat-list-item *ngFor="let l of locations" (click)="selectedLocation = l; expanded = false">{{ l.name }}</mat-list-item>
+      <mat-list>
+          <mat-list-item *ngFor="let l of locations" (click)="selectedLocation = l; expanded = false">
+            <h4 mat-line class="item-name">{{ l.name }}</h4>
+            <p mat-line class="item-description">{{ l.description }}</p>
+          </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
   </mat-accordion>

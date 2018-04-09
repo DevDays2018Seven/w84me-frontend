@@ -12,6 +12,18 @@
     width: 400px;
 }
 
+.panel-description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.item-description {
+    color: grey;
+} 
+
 .view button {
     margin: auto;
+    font-size: 28pt;
+    width: 100pt;
+    height: 100pt;
 }
