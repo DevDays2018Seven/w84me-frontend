@@ -12,7 +12,8 @@ export class EstimationPipe implements PipeTransform {
     const hours = Math.floor(minutes / 60);
 
     const restMinutes = minutes - (hours * 60);
-
-    return hours + 'h ' + restMinutes + 'min';
+    const result = hours + 'h ' + restMinutes + 'min';
+    console.log(result);
+    return result;
   }
 }
