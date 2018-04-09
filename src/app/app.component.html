@@ -34,7 +34,7 @@
 
   <button mat-fab color="accent" *ngIf="selectedLocation" (click)="startStopSession()">{{ sessionId !== null ? 'Stop' : 'Start' }}</button>
 
-  <h1 class="wait-timer" *ngIf="selectedLocation">Estimated Waiting Time: {{ (intervalTimer | async).currentAverageWaitingTime | estimation}}</h1>
+  <h1 class="wait-timer" *ngIf="selectedLocation">Current Average Waiting Time: {{ (intervalTimer | async).currentAverageWaitingTime | estimation}}</h1>
 
 </div>
 
