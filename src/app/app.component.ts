@@ -38,6 +38,12 @@ export class AppComponent implements OnInit {
   public async updateLocations(): Promise<void> {
     const latitude = 52.114666;
     const longitude = 11.627825;
+
+    if (this.distance === null) {
+      this.nearLocations = this.allLocations;
+      return;
+    }
+
     this.nearLocations = await this.locationService.getLocationListNearMe(latitude, longitude, this.distance);
   }
 
@@ -74,7 +80,7 @@ export class AppComponent implements OnInit {
   public pullEstimates(): void {
     this.allLocations.forEach((location) => {
       this.estimationService.getEstimation(location.id).then((est) => {
-        this.estimates.push({locationId: location.id, waittime: est.estimatedWaitingTime, currentWaittime: est.currentAverageWaitingTime});
+        this.estimates.push({ locationId: location.id, waittime: est.estimatedWaitingTime, currentWaittime: est.currentAverageWaitingTime });
       })
     });
   }

@@ -10,10 +10,10 @@
 
 <div class="wait-view" *ngIf="page === 'wait'">
   <mat-form-field class="distance-input">
-    <input matInput placeholder="Select distance" type="number" [(ngModel)]="distance" (change)="updateLocations()">
+    <input matInput placeholder="Select distance [m]" type="number" [(ngModel)]="distance" (change)="updateLocations()">
   </mat-form-field>
   <mat-accordion>
-    <mat-expansion-panel [expanded]="expanded" (opened)="expanded = true">
+    <mat-expansion-panel [expanded]="expanded" (opened)="expanded = true" (closed)="expanded = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
           My Location:
@@ -48,7 +48,7 @@
   </mat-form-field> -->
 
   <div class="table-container mat-elevation-z8">
-    <mat-table #table [dataSource]="locations">
+    <mat-table #table [dataSource]="allLocations">
   
       <!-- Name Column -->
       <ng-container matColumnDef="location">
