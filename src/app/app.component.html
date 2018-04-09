@@ -1,10 +1,14 @@
-<mat-toolbar><span>Home</span></mat-toolbar>
+<mat-toolbar>
+  <span>W84me! Know, how much pain you'll have waiting.</span>
+</mat-toolbar>
 
-<div class="view">  
-  <mat-card class="title-card">
-    <mat-card-title>W8 4 Me!</mat-card-title>
-  </mat-card>
+<button mat-raised-button [matMenuTriggerFor]="menu" color="accent">Go To:</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Search</button>
+  <button mat-menu-item>Wait</button>
+</mat-menu>
 
+<div class="view">
   <mat-accordion>
     <mat-expansion-panel [expanded]="expanded" (opened)="expanded = true">
       <mat-expansion-panel-header>
@@ -17,10 +21,10 @@
       </mat-expansion-panel-header>
 
       <mat-list>
-          <mat-list-item *ngFor="let l of locations" (click)="selectedLocation = l; expanded = false">
-            <h4 mat-line class="item-name">{{ l.name }}</h4>
-            <p mat-line class="item-description">{{ l.description }}</p>
-          </mat-list-item>
+        <mat-list-item *ngFor="let l of locations" (click)="selectedLocation = l; expanded = false">
+          <h4 mat-line class="item-name">{{ l.name }}</h4>
+          <p mat-line class="item-description">{{ l.description }}</p>
+        </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
   </mat-accordion>
@@ -31,10 +35,3 @@
 </div>
 
 <button mat-raised-button *ngIf="false">Test this</button>
-
-
-
-
-
-
-
