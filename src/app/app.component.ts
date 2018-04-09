@@ -12,12 +12,14 @@ import { Estimation } from './models/estimation';
 })
 export class AppComponent implements OnInit {
   private currentEstimation: Estimation | null = null;
-  private locations: WaitLocation[] = [];
+  private allLocations: WaitLocation[] = [];
+  private nearLocations: WaitLocation[] = [];
   private selectedLocation: WaitLocation | null = null;
   private sessionId: number | null = null;
   private page: 'search' | 'wait' = 'wait';
   private columns: string[] = [];
   private estimates: { locationId: number, waittime: number, currentWaittime: number }[] = [];
+  public distance: number;
 
   public constructor(private locationService: LocationService,
     private sessionService: SessionService,
@@ -28,8 +30,15 @@ export class AppComponent implements OnInit {
     // seed random data
     this.sessionService.seedRandomSessions();
 
-    this.locations = await this.locationService.getLocationList();
+    this.allLocations = await this.locationService.getLocationList();
+    this.nearLocations = this.allLocations;
     this.columns = ['location', 'address', 'waittime'];
+  }
+
+  public async updateLocations(): Promise<void> {
+    const latitude = 52.114666;
+    const longitude = 11.627825;
+    this.nearLocations = await this.locationService.getLocationListNearMe(latitude, longitude, this.distance);
   }
 
   public async startStopSession(): Promise<void> {
@@ -63,7 +72,7 @@ export class AppComponent implements OnInit {
   }
 
   public pullEstimates(): void {
-    this.locations.forEach((location) => {
+    this.allLocations.forEach((location) => {
       this.estimationService.getEstimation(location.id).then((est) => {
         this.estimates.push({locationId: location.id, waittime: est.estimatedWaitingTime, currentWaittime: est.currentAverageWaitingTime});
       })

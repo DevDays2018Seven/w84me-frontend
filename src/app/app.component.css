@@ -5,14 +5,16 @@
 
 .wait-view {
     display: grid;
-    grid-gap: 20pt;
     justify-content: center;
+}
+
+.wait-view .distance-input {
+    margin-top: 10pt;
 }
 
 .wait-view mat-expansion-panel {
     width: 400px;
     margin: auto;
-    margin-top: 10pt;
 }
 
 .wait-view mat-expansion-panel .panel-description {

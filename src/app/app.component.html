@@ -9,6 +9,9 @@
 </mat-toolbar>
 
 <div class="wait-view" *ngIf="page === 'wait'">
+  <mat-form-field class="distance-input">
+    <input matInput placeholder="Select distance" type="number" [(ngModel)]="distance" (change)="updateLocations()">
+  </mat-form-field>
   <mat-accordion>
     <mat-expansion-panel [expanded]="expanded" (opened)="expanded = true">
       <mat-expansion-panel-header>
@@ -21,7 +24,7 @@
       </mat-expansion-panel-header>
 
       <mat-list>
-        <mat-list-item *ngFor="let l of locations" (click)="selectLocation(l); expanded = false">
+        <mat-list-item *ngFor="let l of nearLocations" (click)="selectLocation(l); expanded = false">
           <h4 mat-line class="item-name">{{ l.name }}</h4>
           <p mat-line class="item-description">{{ l.description }}</p>
         </mat-list-item>
