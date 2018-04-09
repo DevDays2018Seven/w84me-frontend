@@ -31,18 +31,19 @@
 
   <button mat-fab color="accent" *ngIf="selectedLocation" (click)="startStopSession()">{{ sessionId !== null ? 'Stop' : 'Start' }}</button>
 
-  <h1 class="wait-timer" *ngIf="selectedLocation && currentEstimation">Estimated Waiting Time: {{ currentEstimation.currentAverageWaitingTime | estimation}}</h1>
+  <h1 class="wait-timer" *ngIf="selectedLocation && currentEstimation">Current Average Waiting Time: {{ currentEstimation.currentAverageWaitingTime | estimation}}</h1>
 </div>
 
 <div class="search-view" *ngIf="page === 'search'">
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-select placeholder="Select location filter">
       <mat-option value="option">All</mat-option>
       <mat-option value="option">Dentist</mat-option>
       <mat-option value="option">Surgeon</mat-option>
       <mat-option value="option">Hanibal</mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
+
   <div class="table-container mat-elevation-z8">
     <mat-table #table [dataSource]="locations">
   
@@ -70,8 +71,8 @@
       <ng-container matColumnDef="waittime">
           <mat-header-cell *matHeaderCellDef> Average waiting time </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <div>{{ fmtWaittime(element)[0] }}</div>
-            <div>{{ fmtWaittime(element)[1] }}</div>
+            <div>Est.: {{ fmtWaittime(element)[0] | estimation }}</div>
+            <div>Avg.: {{ fmtWaittime(element)[1] | estimation }}</div>
           </mat-cell>
         </ng-container>
   

@@ -51,13 +51,13 @@ export class AppComponent implements OnInit {
     return location.address.split(', ');
   }
 
-  public fmtWaittime(location: WaitLocation): string[] {
-    const result: string[] = [];
+  public fmtWaittime(location: WaitLocation): number[] {
+    const result: number[] = [];
 
     const estimate = this.estimates.find((est) => est.locationId === location.id);
 
-    result.push(`Est.: ${estimate.waittime}`);
-    result.push(`Avg.: ${estimate.currentWaittime}`);
+    result.push(estimate.waittime);
+    result.push(estimate.currentWaittime);
 
     return result;
   }
