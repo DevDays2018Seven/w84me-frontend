@@ -1,4 +1,4 @@
-export class Location {
+export class WaitLocation {
 
     constructor(
         private _id: number,
@@ -9,51 +9,51 @@ export class Location {
         private _longitude: string
     ) {}
 
-    get id(): number {
+    public get id(): number {
         return this._id;
     }
 
-    set id(value: number) {
+    public set id(value: number) {
         this._id = value;
     }
 
-    get name(): string {
+    public get name(): string {
         return this._name;
     }
 
-    set name(value: string) {
+    public set name(value: string) {
         this._name = value;
     }
 
-    get description(): string {
+    public get description(): string {
         return this._description;
     }
 
-    set description(value: string) {
+    public set description(value: string) {
         this._description = value;
     }
 
-    get address(): string {
+    public get address(): string {
         return this._address;
     }
 
-    set address(value: string) {
+    public set address(value: string) {
         this._address = value;
     }
 
-    get latitude(): string {
+    public get latitude(): string {
         return this._latitude;
     }
 
-    set latitude(value: string) {
+    public set latitude(value: string) {
         this._latitude = value;
     }
 
-    get longitude(): string {
+    public get longitude(): string {
         return this._longitude;
     }
 
-    set longitude(value: string) {
+    public set longitude(value: string) {
         this._longitude = value;
     }
 
@@ -64,14 +64,14 @@ export class Location {
     //     };
     // }
 
-    public static fromJson(json: any): Location {
-        return new Location(
-            json.id,
-            json.name,
-            json.description,
-            json.address,
-            json.latitude,
-            json.longitude
+    public static fromJson(json: any): WaitLocation {
+        return new WaitLocation(
+            json._id,
+            json._name,
+            json._description,
+            json._address,
+            json._latitude,
+            json._longitude
         );
     }
 

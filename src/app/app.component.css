@@ -11,3 +11,7 @@
 .view mat-expansion-panel {
     width: 400px;
 }
+
+.view button {
+    margin: auto;
+}
