@@ -26,6 +26,8 @@
   </mat-accordion>
 
   <button mat-fab color="accent" *ngIf="selectedLocation" (click)="startStopSession()">{{ session ? 'Stop' : 'Start' }}</button>
+
+  <h1 class="wait-timer" *ngIf="selectedLocation">Estimated Waiting Time: 01h 32' 17''</h1>
 </div>
 
 <button mat-raised-button *ngIf="false">Test this</button>

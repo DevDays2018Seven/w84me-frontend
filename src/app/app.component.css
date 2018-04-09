@@ -10,14 +10,20 @@
 
 .view mat-expansion-panel {
     width: 400px;
+    margin: auto;
 }
 
-.panel-description {
+.view mat-expansion-panel .panel-description {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.item-description {
+.view mat-expansion-panel mat-list {
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+.view mat-expansion-panel mat-list .item-description {
     color: grey;
 } 
 
@@ -26,4 +32,11 @@
     font-size: 28pt;
     width: 100pt;
     height: 100pt;
+}
+
+.view .wait-timer {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    letter-spacing: -1pt;
+    color: firebrick;
 }
