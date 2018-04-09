@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatCardModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AppComponent } from './app.component';
   imports: [
     MatToolbarModule,
     MatCardModule,
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
