@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { WaitSession } from '../../models/session';
 
 @Injectable()
 export class SessionService {
@@ -9,8 +8,14 @@ export class SessionService {
   constructor(private http: HttpClient) { }
 
   /** Starts a session and returned the new id */
-  public startStopSession(session: WaitSession): Promise<number> {
+  public startSession(locationId: number, timestamp: number): Promise<number> {
     const url = this.serverBase;
-    return this.http.post<number>(url, session).toPromise();
+    return this.http.post<number>(url, { locationId, timestamp }).toPromise();
+  }
+
+  /** Stopps a session */
+  public stopSession(sessionId: number, locationId: number, timestamp: number): Promise<void> {
+    const url = this.serverBase;
+    return this.http.post<void>(url, { sessionId, locationId, timestamp }).toPromise();
   }
 }
