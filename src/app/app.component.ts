@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from './models/location';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public panelOpenState: boolean = false;
-  public locations = [1,2,3,4,5];
+  public locations: Location[] = [1, 2, 3, 4, 5].map(el => new Location(el, `Name${el}`, `Description${el}`, 'here', 'there', 'nowhere'));
+
+  public selectedLocation: Location | null = null;
 }

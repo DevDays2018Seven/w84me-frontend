@@ -7,3 +7,7 @@
 .view .title-card {
     text-align: center;
 }
+
+.view mat-expansion-panel {
+    width: 400px;
+}

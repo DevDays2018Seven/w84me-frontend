@@ -2,22 +2,22 @@
 
 <div class="view">  
   <mat-card class="title-card">
-    <mat-card-title>Wait 4 Me!</mat-card-title>
+    <mat-card-title>W8 4 Me!</mat-card-title>
   </mat-card>
-  
+
   <mat-accordion>
-    <mat-expansion-panel>
+    <mat-expansion-panel [expanded]="expanded" (opened)="expanded = true">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Personal data
+          My Location:
         </mat-panel-title>
         <mat-panel-description>
-          Type your name and age
+          {{ selectedLocation?.name || 'Select your location!' }}
         </mat-panel-description>
       </mat-expansion-panel-header>
 
       <mat-list role="list">
-          <mat-list-item *ngFor="let l of locations">{{ l }}</mat-list-item>
+          <mat-list-item *ngFor="let l of locations" (click)="selectedLocation = l; expanded = false">{{ l.name }}</mat-list-item>
       </mat-list>
     </mat-expansion-panel>
   </mat-accordion>
