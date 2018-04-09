@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public panelOpenState: boolean = false;
+  public locations = [1,2,3,4,5];
 }

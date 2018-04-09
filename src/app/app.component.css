@@ -1,4 +1,9 @@
 .view {
-    display: flex;
+    display: grid;
+    grid-gap: 20pt;
     justify-content: center;
+}
+
+.view .title-card {
+    text-align: center;
 }
